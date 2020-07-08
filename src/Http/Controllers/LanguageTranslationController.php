@@ -27,7 +27,8 @@ class LanguageTranslationController extends Controller
         }
 
         $languages = $this->translation->allLanguages();
-        $groups = $this->translation->getGroupsFor(config('app.locale'))->merge('single');
+        $groups = $this->translation->getGroupsFor(config('app.locale'))->toBase();
+        $groups = $groups->merge(['single']);
         $translations = $this->translation->filterTranslationsFor($language, $request->get('filter'));
 
         if ($request->has('group') && $request->get('group')) {
